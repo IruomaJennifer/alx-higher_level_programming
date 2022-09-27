@@ -5,10 +5,10 @@ int get_end(int len, listint_t *h);
  * is_palindrome - checks if a list is a palindrome
  * @head: start of the list
  * Return: 0 if yes and 1 if not
- * */
+ */
 int is_palindrome(listint_t **head)
 {
-	int length = 0, limit, i, iter = 0, check;
+	int length = 0, limit, i, iter = 1, check;
 	listint_t *cnter = *head;
 
 	if (*head == NULL)
@@ -23,10 +23,11 @@ int is_palindrome(listint_t **head)
 	else
 		limit = (length / 2)  + 1;
 	cnter = *head;
-	while (iter <= limit)
+	while (iter < limit)
 	{
 		i = cnter->n;
 		check = get_end(length, *head);
+		printf("%d - check, %d - i\n", check, i);
 		if (i != check)
 			return (0);
 		iter++;
@@ -42,13 +43,16 @@ int is_palindrome(listint_t **head)
  * @len: the length from behind
  * @h: the beginninof the list
  * Return: an integer
- * */
+ */
 int get_end(int len, listint_t *h)
 {
-	int i = 0;
-	listint_t *curr = h;	
-	
-	while (i <= len)
+	int i = 1;
+	listint_t *curr = h;
+
+	while (i < len)
+	{
 		curr = curr->next;
+		i++;
+	}
 	return (curr->n);
 }
