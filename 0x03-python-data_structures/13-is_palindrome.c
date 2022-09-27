@@ -1,5 +1,5 @@
 #include "lists.h"
-int get_end(int len, listint_t *h);
+int *get_end(int, listint_t *);
 
 /**
  * is_palindrome - checks if a list is a palindrome
@@ -8,7 +8,7 @@ int get_end(int len, listint_t *h);
  */
 int is_palindrome(listint_t **head)
 {
-	int length = 0, limit, i, iter = 1, check;
+	int length = 0, limit, i, iter = 1, *check;
 	listint_t *cnter = *head;
 
 	if (*head == NULL)
@@ -22,12 +22,12 @@ int is_palindrome(listint_t **head)
 		limit = length / 2;
 	else
 		limit = (length / 2)  + 1;
+	check = get_end(limit, *head);
 	cnter = *head;
 	while (iter < limit)
 	{
 		i = cnter->n;
-		check = get_end(length, *head);
-		if (i != check)
+		if (i != check[iter - 1])
 			return (0);
 		iter++;
 		length--;
@@ -39,19 +39,21 @@ int is_palindrome(listint_t **head)
 
 /**
  * get_end - gets the other side of a palindrome
- * @len: the length from behind
+ * @limit: the length from behind
  * @h: the beginninof the list
  * Return: an integer
  */
-int get_end(int len, listint_t *h)
+int *get_end(int limit, listint_t *h)
 {
-	int i = 1;
+	int i = 0, *endpoints;
 	listint_t *curr = h;
 
-	while (i < len)
+	endpoints = malloc(sizeof(int) * limit);
+	while (i < limit)
 	{
+		endpoints[i] = curr->n;
 		curr = curr->next;
 		i++;
 	}
-	return (curr->n);
+	return (endpoints);
 }
