@@ -27,13 +27,17 @@ int is_palindrome(listint_t **head)
 	while (iter < limit)
 	{
 		i = cnter->n;
-		if (i != check[iter - 1])
+		if (i != check[limit - 1])
+		{
+			free(check);
 			return (0);
+		}
 		iter++;
 		length--;
 		if (iter != limit)
 			cnter = cnter->next;
 	}
+	free(check);
 	return (1);
 }
 
