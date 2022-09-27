@@ -27,7 +27,6 @@ int is_palindrome(listint_t **head)
 	{
 		i = cnter->n;
 		check = get_end(length, *head);
-		printf("%d - check, %d - i\n", check, i);
 		if (i != check)
 			return (0);
 		iter++;
