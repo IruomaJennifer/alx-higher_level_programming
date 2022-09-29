@@ -18,16 +18,14 @@ int is_palindrome(listint_t **head)
 		length++;
 		cnter = cnter->next;
 	}
-	if (length % 2 == 0)
-		limit = length / 2;
-	else
-		limit = (length / 2)  + 1;
+	limit = length / 2;
 	check = get_end(limit, *head);
 	cnter = *head;
 	j = limit;
-	while (iter < limit)
+	while (iter < limit + 1)
 	{
 		i = cnter->n;
+		printf("%d(check[j-1]) - %d(j-1) - %d(i)\n",check[j - 1], j-1, i);
 		if (i != check[j - 1])
 		{
 			/*printf("%d - i, %d - (j-1), %d - (limit - 1)\n", i, j -1, limit - 1);*/
@@ -37,7 +35,7 @@ int is_palindrome(listint_t **head)
 		iter++;
 		length--;
 		j--;
-		if (iter != limit)
+		if (iter != limit + 1)
 			cnter = cnter->next;
 	}
 	free(check);
@@ -55,7 +53,7 @@ int *get_end(int limit, listint_t *h)
 	int i = 0, *endpoints;
 	listint_t *curr = h;
 
-	endpoints = malloc(sizeof(int) * (limit + 1));
+	endpoints = malloc(sizeof(int) * (limit));
 	while (i < limit)
 	{
 		curr = curr->next;
@@ -64,7 +62,7 @@ int *get_end(int limit, listint_t *h)
 	i = 0;
 	if (curr != NULL)
 	{
-	while (i < limit)
+	while (i < limit && curr != NULL)
 	{
 		endpoints[i] = curr->n;
 		curr = curr->next;
