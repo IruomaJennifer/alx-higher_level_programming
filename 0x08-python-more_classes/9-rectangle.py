@@ -8,11 +8,11 @@ class Rectangle:
     number_of_instances = 0
     print_symbol = "#"
 
-    def __init__(self, width=0, hieght=0):
+    def __init__(self, width=0, height=0):
         """Initializes a new rectangle"""
         type(self).number_of_instances += 1
         self.width = width
-        self.hieght
+        self.height = height
 
     @property
     def width(self) -> int:
